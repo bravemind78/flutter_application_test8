@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_test8/modules/todolist/archives.dart';
 import 'package:flutter_application_test8/modules/todolist/donetasks.dart';
 import 'package:flutter_application_test8/modules/todolist/tasks.dart';
+import 'package:flutter_application_test8/shared/component/defaultformfield.dart';
 import 'package:flutter_application_test8/shared/constant/constant.dart';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
@@ -21,7 +22,6 @@ class _MyWidgetState extends State<HomeScreen> {
     creatDatabase();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,48 +176,4 @@ class _MyWidgetState extends State<HomeScreen> {
       });
     });
   }
-  ///////////////////////text form widget ///////////////////////////////////////
-
-  Widget defaultFormField({
-    required TextEditingController controller,
-    required TextInputType type,
-    required IconData prefix,
-    required String label,
-    String hintText = "Enter your Email",
-    Function? onSubmit,
-    Function? onChange,
-    Function? onTap,
-    Function? validate,
-    Function? suffixPressed,
-    bool isPassword = false,
-    IconData? suffix,
-  }) =>
-      TextFormField(
-        controller: controller,
-        keyboardType: type,
-        onFieldSubmitted: (value) {
-          onSubmit!(value);
-        },
-        onChanged: (value) {
-          onChange!(value);
-        },
-        validator: (value) {
-          return validate!(value);
-        },
-        onTap: () {
-          onTap!();
-        },
-        decoration: InputDecoration(
-            hintText: hintText,
-            labelText: label,
-            prefixIcon: Icon(prefix),
-            suffixIcon: IconButton(
-              onPressed: () {
-                suffixPressed!();
-              },
-              icon: Icon(suffix),
-            ),
-            border: OutlineInputBorder()),
-      );
-  //////////////////////////////////////////////////////////////////////
 }

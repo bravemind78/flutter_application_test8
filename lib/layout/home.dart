@@ -13,10 +13,10 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _MyWidgetState();
+  State<HomeScreen> createState() => _HomeScreen();
 }
 
-class _MyWidgetState extends State<HomeScreen> {
+class _HomeScreen extends State<HomeScreen> {
   void initState() {
     super.initState();
     creatDatabase();
@@ -168,7 +168,7 @@ class _MyWidgetState extends State<HomeScreen> {
     database.transaction((txn) {
       return txn
           .rawInsert(
-              "INSERT INTO tasks(title, date, time, status) VALUES('first tasks','13/5/1998','20:15','new')")
+              "INSERT INTO tasks(title, date, time, status) VALUES('first tasks','13/05/1998','20:15','new')")
           .then((value) {
         print("$value inserted successfully");
       }).catchError((onError) {

@@ -5,7 +5,7 @@ Widget defaultFormField({
   required TextInputType type,
   required IconData prefix,
   required String label,
-  String hintText = "Enter your Email",
+  double radius = 10,
   Function? onSubmit,
   Function? onChange,
   Function? onTap,
@@ -13,31 +13,41 @@ Widget defaultFormField({
   Function? suffixPressed,
   bool isPassword = false,
   IconData? suffix,
+  String hintText = "Enter your name",
 }) =>
     TextFormField(
       controller: controller,
       keyboardType: type,
       onFieldSubmitted: (value) {
-        onSubmit!(value);
+        if (onSubmit != null) {
+          onSubmit(value);
+        }
       },
       onChanged: (value) {
-        onChange!(value);
-      },
-      validator: (value) {
-        return validate!(value);
+        if (onChange != null) {
+          onChange(value);
+        }
       },
       onTap: () {
-        onTap!();
+        if (onTap != null) {
+          onTap();
+        }
+      },
+      validator: (value) {
+        return validate != null ? validate(value) : null;
+        //return null;
       },
       decoration: InputDecoration(
           hintText: hintText,
-          labelText: label,
           prefixIcon: Icon(prefix),
-          suffixIcon: IconButton(
-            onPressed: () {
-              suffixPressed!();
-            },
-            icon: Icon(suffix),
-          ),
-          border: OutlineInputBorder()),
+          suffixIcon: suffix != null
+              ? IconButton(
+                  onPressed: () {
+                    suffixPressed!();
+                  },
+                  icon: Icon(suffix),
+                )
+              : null,
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(radius))),
     );
